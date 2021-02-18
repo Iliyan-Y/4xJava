@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+// Routing and Response
 @RestController
 @RequestMapping(path = "api/player")
 public class PlayerController {
