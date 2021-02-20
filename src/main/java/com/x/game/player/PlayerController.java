@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 // Routing and Response
+// Request hit -> params -> service
 @RestController
 @RequestMapping(path = "api/player")
 public class PlayerController {
@@ -28,7 +29,14 @@ public class PlayerController {
   }
 
   @DeleteMapping(path = "{playerId}")
-  public void  deletePlayer(@PathVariable("playerId") Long playerId){
-      playerService.deletePlayer(playerId);
+  public void deletePlayer(@PathVariable("playerId") Long playerId) {
+    playerService.deletePlayer(playerId);
+  }
+
+  @PutMapping(path = "{playerId}")
+  public void updatePlayer(@PathVariable("playerId") Long playerId,
+                           @RequestParam(required = false) String name,
+                           @RequestParam(required = false) String email) {
+    playerService.updatePlayer(playerId, name, email);
   }
 }
