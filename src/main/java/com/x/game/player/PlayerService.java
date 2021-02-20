@@ -31,4 +31,11 @@ public class PlayerService {
 
     playerRepository.save(player);
   }
+
+  public void deletePlayer(Long playerId) {
+    if (!playerRepository.existsById(playerId)){
+      throw new IllegalStateException("Player does NOT exists");
+    }
+    playerRepository.deleteById(playerId);
+  }
 }
