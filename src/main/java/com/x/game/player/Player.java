@@ -18,17 +18,20 @@ public class Player {
 
   private Long id;
   private String name;
+  private String email;
 
   public Player() {
   }
 
-  public Player(Long id, String name) {
+  public Player(Long id, String name, String email) {
     this.id = id;
     this.name = name;
+    this.email = email;
   }
 
-  public Player(String name) {
+  public Player(String name, String email) {
     this.name = name;
+    this.email = email;
   }
 
   public Long getId() {
@@ -52,6 +55,15 @@ public class Player {
     return "Player{" +
         "id=" + id +
         ", name='" + name + '\'' +
+        ", email='" + email + '\'' +
         '}';
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
   }
 }
