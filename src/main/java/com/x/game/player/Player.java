@@ -1,22 +1,28 @@
 package com.x.game.player;
 
+import com.x.game.buildings.Buildings;
+
 import javax.persistence.*;
 
 @Entity
 @Table
 public class Player {
- @Id
- @SequenceGenerator(
-     name = "player_sequence",
-     sequenceName = "player_sequence",
-     allocationSize = 1
- )
- @GeneratedValue(
-     strategy = GenerationType.SEQUENCE,
-     generator = "player_sequence"
- )
-
+  @Id
+  @SequenceGenerator(
+      name = "player_sequence",
+      sequenceName = "player_sequence",
+      allocationSize = 1
+  )
+  @GeneratedValue(
+      strategy = GenerationType.SEQUENCE,
+      generator = "player_sequence"
+  )
+  @Column(name = "id")
   private Long id;
+
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "buildings_id", referencedColumnName = "id")
+  private Buildings buildings;
   private String name;
   private String email;
 
@@ -50,20 +56,29 @@ public class Player {
     this.name = name;
   }
 
-  @Override
-  public String toString() {
-    return "Player{" +
-        "id=" + id +
-        ", name='" + name + '\'' +
-        ", email='" + email + '\'' +
-        '}';
-  }
-
   public String getEmail() {
     return email;
   }
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public Buildings getBuildings() {
+    return buildings;
+  }
+
+  public void setBuildings(Buildings buildings) {
+    this.buildings = buildings;
+  }
+
+  @Override
+  public String toString() {
+    return "Player{" +
+        "id=" + id +
+        ", buildings=" + buildings +
+        ", name='" + name + '\'' +
+        ", email='" + email + '\'' +
+        '}';
   }
 }
