@@ -5,7 +5,7 @@ import com.x.game.buildings.Buildings;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "players")
 public class Player {
   @Id
   @SequenceGenerator(
@@ -67,6 +67,8 @@ public class Player {
   public Buildings getBuildings() {
     return buildings;
   }
+
+  public String displayTownName() {return  buildings.getTownName(); }
 
   public void setBuildings(Buildings buildings) {
     this.buildings = buildings;

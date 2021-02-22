@@ -1,12 +1,11 @@
 package com.x.game.player;
 
+import com.x.game.buildings.BuildingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 // takes params from the controller ->
 // perform all the logic
@@ -14,14 +13,30 @@ import java.util.Optional;
 public class PlayerService {
 
   private final PlayerRepository playerRepository;
+  private final BuildingsRepository buildingsRepository;
 
   @Autowired
-  public PlayerService(PlayerRepository playerRepository) {
+  public PlayerService(PlayerRepository playerRepository,
+                       BuildingsRepository buildingsRepository) {
     this.playerRepository = playerRepository;
+    this.buildingsRepository = buildingsRepository;
   }
 
   public List<Player> getPlayer() {
     return playerRepository.findAll();
+  }
+
+  public Map<String, Object> townName(Long playerId) {
+    Player player = playerRepository.findById(playerId).orElseThrow(() -> new IllegalStateException("Player does NOT exists"));
+    ;
+    Map<String, Object> response = new LinkedHashMap<>();
+    response.put("player", player);
+    response.put("buildings", player.getBuildings());
+    response.put("Castle: ", player.displayTownName());
+    System.out.println("SEND" + response);
+//    System.out.println(player.getBuildings());
+//    System.out.println(player.displayTownName());
+    return response;
   }
 
   public void addNewPlayer(Player player) {

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 // Routing and Response
 // Request hit -> params -> service
@@ -38,5 +39,10 @@ public class PlayerController {
                            @RequestParam(required = false) String name,
                            @RequestParam(required = false) String email) {
     playerService.updatePlayer(playerId, name, email);
+  }
+
+  @GetMapping(path = "more/{playerId}" )
+  public Map<String, Object> testMore(@PathVariable("playerId") Long playerId){
+    return playerService.townName(playerId);
   }
 }

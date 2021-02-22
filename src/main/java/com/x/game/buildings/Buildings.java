@@ -19,7 +19,7 @@ public class Buildings {
   private Player player;
 
   private String townName;
-  private int population;
+  private int population = 100;
 
   public Buildings() {
   }
