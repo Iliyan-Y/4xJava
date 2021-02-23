@@ -53,6 +53,10 @@ public class Buildings {
     this.population = population;
   }
 
+  public String getPlayer() {
+    return player.getName();
+  }
+
   @Override
   public String toString() {
     return "Buildings{" +

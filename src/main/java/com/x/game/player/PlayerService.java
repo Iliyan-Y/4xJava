@@ -13,13 +13,10 @@ import java.util.*;
 public class PlayerService {
 
   private final PlayerRepository playerRepository;
-  private final BuildingsRepository buildingsRepository;
 
   @Autowired
-  public PlayerService(PlayerRepository playerRepository,
-                       BuildingsRepository buildingsRepository) {
+  public PlayerService(PlayerRepository playerRepository) {
     this.playerRepository = playerRepository;
-    this.buildingsRepository = buildingsRepository;
   }
 
   public List<Player> getPlayer() {
@@ -27,15 +24,16 @@ public class PlayerService {
   }
 
   public Map<String, Object> townName(Long playerId) {
-    Player player = playerRepository.findById(playerId).orElseThrow(() -> new IllegalStateException("Player does NOT exists"));
-    ;
+    Player player = playerRepository.findById(playerId)
+        .orElseThrow(() -> new IllegalStateException("Player does NOT exists"));
+    
     Map<String, Object> response = new LinkedHashMap<>();
     response.put("player", player);
     response.put("buildings", player.getBuildings());
     response.put("Castle: ", player.displayTownName());
-    System.out.println("SEND" + response);
-//    System.out.println(player.getBuildings());
-//    System.out.println(player.displayTownName());
+
+    System.out.println(player.getBuildings().getPlayer());
+    System.out.println(player.getBuildings().getTownName());
     return response;
   }
 
